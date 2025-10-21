@@ -1,4 +1,6 @@
 import React from "react";
+import { Pencil, Trash2 } from "lucide-react";
+
 const clients = [
   {
     id: 1,
@@ -49,28 +51,49 @@ const Table = () => {
         {/* head */}
         <thead>
           <tr>
-            <th></th>
+            <th>ID</th>
             <th>Name</th>
             <th>Email</th>
             <th>Job</th>
             <th>Rate</th>
+            <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
+
         <tbody className="hover">
-          {/* row 1 */}
           {clients.map((client) => (
-            <tr>
+            <tr key={client.id}>
               <th>{client.id}</th>
               <td>{client.name}</td>
               <td>{client.email}</td>
               <td>{client.job}</td>
               <td>{client.rate}</td>
+
+              {/* Active / Inactive Button */}
               <td>
                 <button
-                  className={`btn rounded-full w-20 ${
-                    client.isActive ? `btn-primary` : `btn-outline-primary`
+                  className={`btn flex items-center justify-center gap-2 rounded-full w-24 ${
+                    client.isActive ? "btn-primary" : "btn-outline-primary"
                   }`}
-                />
+                >
+                  {client.isActive ? <>Active</> : <>Inactive</>}
+                </button>
+              </td>
+
+              {/* Update & Delete Buttons */}
+              <td>
+                <div className="flex items-center gap-2">
+                  <button className="btn btn-sm btn-outline btn-info flex items-center gap-1 rounded-full">
+                    <Pencil size={16} />
+                    Update
+                  </button>
+
+                  <button className="btn btn-sm btn-outline btn-error flex items-center gap-1 rounded-full">
+                    <Trash2 size={16} />
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
